@@ -1,137 +1,630 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Davy+Livia ❤️</title>
+    <title>Davy & Livia - Nosso Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --rosa-claro: #ffd6e0;
+            --rosa: #ff9bb3;
+            --rosa-escuro: #ff6b8b;
+            --lilas: #d8b4fe;
+            --dourado: #fbd38d;
+            --branco: #fff9fb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: #1a1a1a;
-            color: #fff;
-            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--branco);
+            color: #5a3d4e;
             overflow-x: hidden;
-            overflow-y: auto;
             position: relative;
-            min-height: 100vh;
         }
-        h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+
+        /* Corações flutuantes */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+            z-index: -1;
         }
-        #contador {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            font-weight: bold;
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
         }
-        .fotos {
-            width: 300px;
-            height: 300px;
-            margin: 20px auto;
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--rosa-claro), var(--lilas));
+            padding: 2rem 1rem;
+            text-align: center;
             position: relative;
-            border-radius: 20px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        .fotos img {
-            width: 100%;
-            height: auto;
+
+        header::before {
+            content: "";
             position: absolute;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            border-radius: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.3)" d="M30,30 Q50,10 70,30 T90,30 T70,70 T30,70 T10,30 T30,30 Z"></path></svg>');
+            background-size: 80px 80px;
+            opacity: 0.1;
         }
-        .mensagem {
-            font-size: 1.3rem;
-            margin-top: 20px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--rosa-escuro);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7a5a6b;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Contador */
+        .counter-container {
+            background-color: rgba(255, 255, 255, 0.7);
             border-radius: 15px;
-            display: inline-block;
-            max-width: 80%;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            margin: 1rem auto;
+            max-width: 500px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
         }
-        .coracao {
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .counter-item {
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .counter-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--rosa-escuro);
+            margin-bottom: 0.2rem;
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            color: #7a5a6b;
+        }
+
+        /* Texto principal */
+        .love-letter {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .love-letter::before {
+            content: "";
             position: absolute;
-            color: red;
-            font-size: 30px;
-            animation: cair 6s linear infinite;
-            top: -10vh;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--rosa), var(--lilas));
         }
-        @keyframes cair {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+
+        .typed-text {
+            min-height: 150px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2rem;
+            background-color: var(--rosa-escuro);
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Botão de amor */
+        .love-button-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, var(--rosa), var(--lilas));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 139, 0.3);
+            font-family: 'Dancing Script', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 139, 0.4);
+        }
+
+        .love-button:active {
+            transform: translateY(1px);
+        }
+
+        .love-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .love-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        .love-message {
+            margin-top: 1rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--rosa-escuro);
+            min-height: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Galeria */
+        .gallery {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--rosa-escuro);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .gallery-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--rosa), var(--lilas));
+            margin: 0.5rem auto;
+        }
+
+        .photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .photo {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo:hover::after {
+            opacity: 1;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--rosa-claro), var(--lilas));
+            color: #5a3d4e;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        footer p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .counter {
+                gap: 0.5rem;
+            }
+            
+            .counter-number {
+                font-size: 1.5rem;
+            }
+            
+            .love-letter {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+            
+            .photos {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .counter-item {
+                min-width: 60px;
+            }
+            
+            .counter-number {
+                font-size: 1.2rem;
+            }
+            
+            .counter-label {
+                font-size: 0.8rem;
+            }
+            
+            footer p {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <iframe style="border-radius:12px; margin-bottom: 20px;" src="https://open.spotify.com/embed/track/3vkCueOmm7xQDoJ17W1Pm3?utm_source=generator" width="90%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    
-    <h1> ❤️Davy+Livia❤️ </h1>
-    <p>Estamos juntos há:</p>
-    <div id="contador"></div>
-    
-    <div class="fotos">
-        <img src="1.jpg" alt="Foto 1" class="foto ativa">
-        <img src="2.jpg" alt="Foto 2" class="foto">
-        <img src="3.jpg" alt="Foto 3" class="foto">
-        <img src="4.jpg" alt="Foto 4" class="foto">
-        <img src="5.jpg" alt="Foto 5" class="foto">
-        <img src="6.jpg" alt="Foto 6" class="foto">
-        <img src="7.jpg" alt="Foto 7" class="foto">
-        <img src="8.jpg" alt="Foto 8" class="foto">
-        <img src="9.jpg" alt="Foto 9" class="foto">
-        <img src="10.jpg" alt="Foto 10" class="foto">
-    </div>
-    
-    <p class="mensagem">Se eu pudesse fazer um pedido agora, seria que o tempo desacelerasse quando estamos juntos, para aproveitar cada segundo ao seu lado sem pressa. Mas, enquanto isso não acontece, prometo fazer de cada instante uma lembrança que vamos guardar para sempre.</p>
-    <p class="mensagem">Te amo além das palavras, meu amor. ❤️</p>
-    
-    <script>
-        function atualizarContador() {
-            const dataInicial = new Date("2024-12-22T18:40:00");
-            const agora = new Date();
-            let diferenca = agora - dataInicial;
-            
-            let segundos = Math.floor(diferenca / 1000) % 60;
-            let minutos = Math.floor(diferenca / (1000 * 60)) % 60;
-            let horas = Math.floor(diferenca / (1000 * 60 * 60)) % 24;
-            let dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)) % 30;
-            let meses = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 30)) % 12;
-            let anos = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365));
-            
-            document.getElementById("contador").innerText = `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
-        }
-        setInterval(atualizarContador, 1000);
-        atualizarContador();
-        
-        function criarCoracao() {
-            const coracao = document.createElement("div");
-            coracao.classList.add("coracao");
-            coracao.innerHTML = "❤";
-            coracao.style.left = Math.random() * 100 + "vw";
-            coracao.style.animationDuration = Math.random() * 3 + 3 + "s";
-            document.body.appendChild(coracao);
-            setTimeout(() => coracao.remove(), 6000);
-        }
-        setInterval(criarCoracao, 400);
+    <!-- Corações flutuantes -->
+    <div class="hearts-container"></div>
 
-        function alternarFotos() {
-            const fotos = document.querySelectorAll(".foto");
-            let index = 0;
-            setInterval(() => {
-                fotos.forEach(foto => foto.style.opacity = "0");
-                fotos[index].style.opacity = "1";
-                index = (index + 1) % fotos.length;
-            }, 3000);
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Davy & Livia</h1>
+        <p class="subtitle">Nossa história...❤️</p>
+    </header>
+
+    <!-- Contador de tempo -->
+    <div class="counter-container">
+        <h2 style="text-align: center; margin-bottom: 1rem; color: var(--rosa-escuro); font-family: 'Dancing Script', cursive;">
+            Desde que nossos caminhos se cruzaram...
+        </h2>
+        <div class="counter">
+            <div class="counter-item">
+                <div class="counter-number" id="months">0</div>
+                <div class="counter-label">Meses</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="days">0</div>
+                <div class="counter-label">Dias</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="hours">0</div>
+                <div class="counter-label">Horas</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="minutes">0</div>
+                <div class="counter-label">Minutos</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="seconds">0</div>
+                <div class="counter-label">Segundos</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carta de amor -->
+    <div class="love-letter">
+        <div class="typed-text" id="typed-text"></div>
+        <span class="cursor" id="cursor"></span>
+    </div>
+
+    <!-- Botão de amor -->
+    <div class="love-button-container">
+        <button class="love-button" id="love-button">Te amo 💖</button>
+        <div class="love-message" id="love-message"></div>
+    </div>
+
+    <!-- Galeria de fotos -->
+    <div class="gallery">
+        <h2 class="gallery-title">Nossos Momentos</h2>
+        <div class="photos" id="photos">
+            <img src="1.jpg" alt="Foto 1" class="foto ativa">
+            <img src="2.jpg" alt="Foto 2" class="foto">
+            <img src="3.jpg" alt="Foto 3" class="foto">
+            <img src="4.jpg" alt="Foto 4" class="foto">
+            <img src="5.jpg" alt="Foto 5" class="foto">
+            <img src="6.jpg" alt="Foto 6" class="foto">
+            <img src="7.jpg" alt="Foto 7" class="foto">
+            <img src="8.jpg" alt="Foto 8" class="foto">
+            <img src="9.jpg" alt="Foto 9" class="foto">
+            <img src="10.jpg" alt="Foto 10" class="foto">
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Feito com amor por Davy</p>
+        <p>Para a garota mais linda do mundo: Livia ❤️</p>
+    </footer>
+
+    <script>
+        // Data em que se conheceram (substitua pela data correta)
+        const meetDate = new Date('2024-12-22T17:00:00');
+        
+        // Atualizar contador
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - meetDate;
+            
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
         }
-        alternarFotos();
+        
+        // Atualizar a cada segundo
+        updateCounter();
+        setInterval(updateCounter, 1000);
+        
+        // Texto digitado
+        const text = "Querida Livia,\n\nDesde o momento em que nossos olhares se encontraram, minha vida ganhou novas cores. Cada dia ao seu lado é uma bênção, cada riso compartilhado é um tesouro, cada desafio superado juntos fortalece nosso amor.\n\nVocê é a pessoa que faz meu coração bater mais forte, que ilumina meus dias com seu sorriso e que me faz acreditar que o amor verdadeiro existe. Não importa o tempo que passe, meu amor por você só cresce, como as ondas do mar que sempre voltam à praia.\n\nObrigado por ser minha companheira, minha melhor amiga e o amor da minha vida. Prometo estar ao seu lado em todos os momentos, nos bons e nos ruins, porque juntos somos mais fortes.\n\nCom todo meu amor,\nDavy";
+        let i = 0;
+        const speed = 30; // Velocidade da digitação
+        
+        function typeWriter() {
+            if (i < text.length) {
+                const typedText = document.getElementById("typed-text");
+                const char = text.charAt(i);
+                
+                // Adiciona o caractere ou trata quebras de linha
+                if (char === '\n') {
+                    typedText.innerHTML += '<br>';
+                } else {
+                    typedText.innerHTML += char;
+                }
+                
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Esconde o cursor quando terminar
+                document.getElementById("cursor").style.display = "none";
+            }
+        }
+        
+        // Inicia a animação de digitação após 1 segundo
+        setTimeout(typeWriter, 1000);
+        
+        // Mensagens de amor aleatórias
+        const loveMessages = [
+            "Você é o amor da minha vida!",
+            "Meu coração é seu para sempre!",
+            "Nenhuma distância pode separar nossos corações.",
+            "Você me faz a pessoa mais feliz do mundo!",
+            "Cada dia ao seu lado é um presente.",
+            "Seu sorriso ilumina meus dias.",
+            "Amo cada detalhe seu, mesmo os imperfeitos.",
+            "Você é minha estrela guia.",
+            "Nossa história é meu conto de fadas favorito.",
+            "Prometo te amar por toda a eternidade."
+        ];
+        
+        document.getElementById('love-button').addEventListener('click', function() {
+            const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            document.getElementById('love-message').textContent = randomMessage;
+            
+            // Criar corações ao redor do botão
+            for (let i = 0; i < 5; i++) {
+                createHeart(this);
+            }
+        });
+        
+        // Criar corações flutuantes
+        function createHearts() {
+            const container = document.querySelector('.hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Tamanho aleatório
+            const size = Math.random() * 20 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            
+            // Posição aleatória
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.top = `${Math.random() * 100}vh`;
+            
+            // Cor aleatória
+            const colors = ['#ff9bb3', '#ffb3c6', '#d8b4fe', '#fbd38d', '#ffd6e0'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            heart.innerHTML = '❤️';
+            
+            // Duração aleatória da animação
+            heart.style.animationDuration = `${Math.random() * 4 + 3}s`;
+            
+            container.appendChild(heart);
+            
+            // Remover após a animação terminar
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        
+        // Criar coração próximo a um elemento
+        function createHeart(element) {
+            const rect = element.getBoundingClientRect();
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Tamanho pequeno
+            heart.style.width = '20px';
+            heart.style.height = '20px';
+            
+            // Posição próxima ao botão
+            heart.style.left = `${rect.left + Math.random() * rect.width - 10}px`;
+            heart.style.top = `${rect.top + Math.random() * rect.height - 10}px`;
+            
+            // Cor
+            heart.style.color = '#ff6b8b';
+            heart.innerHTML = '❤️';
+            
+            // Animação rápida
+            heart.style.animationDuration = '2s';
+            
+            document.body.appendChild(heart);
+            
+            // Remover após a animação terminar
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+        
+        // Criar corações de fundo periodicamente
+        setInterval(createHearts, 300);
+        
+        // Animação de entrada para os elementos
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.love-letter, .gallery, .love-button-container');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.animation = 'slideUp 1s ease-out forwards';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Executa uma vez ao carregar
     </script>
 </body>
 </html>
